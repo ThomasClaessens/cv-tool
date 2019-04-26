@@ -1,7 +1,7 @@
 package be.dominionexperts.cvtool.controller;
 
 import be.dominionexperts.cvtool.dto.Resume;
-import be.dominionexperts.cvtool.exception.EmptyFileException;
+import be.dominionexperts.cvtool.exception.InvalidFileException;
 import be.dominionexperts.cvtool.exception.ValidationException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,7 +25,7 @@ public class UploadControllerTest {
     @Test
     public void whenNoFileGiven_ThrowsEmptyFileException() {
         assertThatThrownBy(() -> uploadController.parseResumeFromJsonFile(null))
-                .isInstanceOf(EmptyFileException.class)
+                .isInstanceOf(InvalidFileException.class)
                 .hasMessage("Expected resume, received nothing");
     }
 
@@ -33,7 +33,7 @@ public class UploadControllerTest {
     public void whenEmptyFileGiven_ThrowsEmptyFileException() {
         MockMultipartFile mockMultipartFile = new MockMultipartFile("some-json", "".getBytes());
         assertThatThrownBy(() -> uploadController.parseResumeFromJsonFile(mockMultipartFile))
-                .isInstanceOf(EmptyFileException.class)
+                .isInstanceOf(InvalidFileException.class)
                 .hasMessage("Expected resume, received nothing");
     }
 
