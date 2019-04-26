@@ -1,11 +1,17 @@
 package be.dominionexperts.cvtool.dto;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public class Skill {
 
+    @NotNull
     private String name;
+
+    @NotNull
     private String level;
+
+    @NotNull
     private List<String> keywords;
 
     public Skill() {

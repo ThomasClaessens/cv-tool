@@ -1,7 +1,10 @@
 package be.dominionexperts.cvtool.dto;
 
+import javax.validation.constraints.NotNull;
+
 public class Location {
 
+    @NotNull
     private String address;
 
     public Location() {

@@ -1,10 +1,19 @@
 package be.dominionexperts.cvtool.dto;
 
+import javax.validation.constraints.NotNull;
+
 public class Award {
 
+    @NotNull
     private String title;
+
+    @NotNull
     private String date;
+
+    @NotNull
     private String awarder;
+
+    @NotNull
     private String summary;
 
     public Award() {

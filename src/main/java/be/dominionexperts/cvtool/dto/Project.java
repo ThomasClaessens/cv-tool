@@ -1,12 +1,20 @@
 package be.dominionexperts.cvtool.dto;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public class Project {
 
+    @NotNull
     private String name;
+
+    @NotNull
     private String description;
+
+    @NotNull
     private String url;
+
+    @NotNull
     private List<String> keywords;
 
     public Project() {

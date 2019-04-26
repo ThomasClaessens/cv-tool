@@ -1,11 +1,22 @@
 package be.dominionexperts.cvtool.dto;
 
+import javax.validation.constraints.NotNull;
+
 public class Headings {
 
+    @NotNull
     private String work;
+
+    @NotNull
     private String education;
+
+    @NotNull
     private String skills;
+
+    @NotNull
     private String projects;
+
+    @NotNull
     private String awards;
 
     public Headings() {

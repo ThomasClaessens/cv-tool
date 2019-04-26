@@ -1,11 +1,22 @@
 package be.dominionexperts.cvtool.dto;
 
+import javax.validation.constraints.NotNull;
+
 public class Basics {
 
+    @NotNull
     private String email;
+
+    @NotNull
     private String phone;
+
+    @NotNull
     private String website;
+
+    @NotNull
     private Location location;
+
+    @NotNull
     private String name;
 
     public Basics() {
