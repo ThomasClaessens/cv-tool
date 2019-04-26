@@ -17,7 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class GenerateResumeControllerTest {
+public class GenerateResumeControllerIT {
 
     private MockMvc mockMvc;
 
@@ -33,7 +33,7 @@ public class GenerateResumeControllerTest {
 
     @Test
     public void generatePdfSuccess() throws Exception {
-        byte[] validResumeByteStream = this.getClass().getResourceAsStream("/validResume.json").readAllBytes();
+        byte[] validResumeByteStream = this.getClass().getResourceAsStream("/resumes/resume.json").readAllBytes();
 
         mockMvc.perform(post(GENERATE_RESUME_ENDPOINT)
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
@@ -49,10 +49,9 @@ public class GenerateResumeControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
-
     @Test
     public void generatePdfInvalidJson() throws Exception {
-        final byte[] invalidByteStream = this.getClass().getResourceAsStream("/invalidResume.json").readAllBytes();
+        final byte[] invalidByteStream = this.getClass().getResourceAsStream("/resumes/resume-invalid-file.json").readAllBytes();
 
         mockMvc.perform(post(GENERATE_RESUME_ENDPOINT)
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
