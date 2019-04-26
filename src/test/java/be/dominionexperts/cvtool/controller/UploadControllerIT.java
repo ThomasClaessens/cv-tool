@@ -5,11 +5,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import java.io.InputStream;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -27,9 +30,16 @@ public class UploadControllerIT {
     }
 
     @Test
-    public void whenNoFileGiven_Returns400BadRequest() throws Exception {
-        mockMvc.perform(post("/api/upload").contentType("multipart/form-data"))
-                                  .andExpect(status().isBadRequest())
-                                  .andReturn();
+    public void whenNoFileGiven_ShouldHaveStatusBadRequest() throws Exception {
+        mockMvc.perform(multipart("/api/upload"))
+               .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void whenFileGiven_ShouldHaveStatusOk() throws Exception {
+        InputStream inputStream = this.getClass().getResourceAsStream("/resumes/resume.json");
+        MockMultipartFile mockMultipartFile = new MockMultipartFile("json-file", inputStream);
+        mockMvc.perform(multipart("/api/upload").file(mockMultipartFile))
+               .andExpect(status().isOk());
     }
 }

@@ -1,14 +1,11 @@
 package be.dominionexperts.cvtool.dto;
 
-import org.springframework.validation.annotation.Validated;
-
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.util.List;
 
-@Validated
 public class Resume {
-    @Positive
+    @Positive(message = "template should be a positive integer")
     private int selectedTemplate;
 
     @NotNull

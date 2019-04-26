@@ -2,6 +2,7 @@ package be.dominionexperts.cvtool.controller;
 
 import be.dominionexperts.cvtool.dto.Resume;
 import be.dominionexperts.cvtool.exception.EmptyFileException;
+import be.dominionexperts.cvtool.exception.ValidationException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,20 @@ public class UploadControllerTest {
     public void whenFileWithInvalidTemplateGiven_ThrowsError() throws IOException {
         InputStream inputStream = this.getClass().getResourceAsStream("/resumes/resume-invalid-template.json");
         MockMultipartFile mockMultipartFile = new MockMultipartFile("some-json", inputStream);
-        Resume resume = uploadController.parseResumeFromJsonFile(mockMultipartFile);
+
+        assertThatThrownBy(() -> uploadController.parseResumeFromJsonFile(mockMultipartFile))
+                .isInstanceOf(ValidationException.class)
+                .hasMessage("Validations failed!");
+    }
+
+    @Test
+    public void whenFileWithInvalidBasicsGiven_ThrowsError() throws IOException {
+        InputStream inputStream = this.getClass().getResourceAsStream("/resumes/resume-invalid-basics.json");
+        MockMultipartFile mockMultipartFile = new MockMultipartFile("some-json", inputStream);
+
+        assertThatThrownBy(() -> uploadController.parseResumeFromJsonFile(mockMultipartFile))
+                .isInstanceOf(ValidationException.class)
+                .hasMessage("Validations failed!");
     }
 
     @Test
@@ -52,6 +66,5 @@ public class UploadControllerTest {
         assertThat(resume.getBasics()).isNotNull();
         assertThat(resume.getBasics().getName()).isEqualTo("Tiziana Troukens");
     }
-
 
 }
