@@ -17,7 +17,6 @@
     <properties>
         <java.version>12</java.version>
         <xdocreport.version>2.0.2</xdocreport.version>
-        <commons-io.version>1.3.2</commons-io.version>
     </properties>
 
     <dependencies>
