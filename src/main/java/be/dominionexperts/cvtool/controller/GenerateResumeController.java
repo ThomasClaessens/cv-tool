@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.nio.file.Path;
 
 @RestController
-public class GenerateController {
-
+public class GenerateResumeController {
     @RequestMapping(value = "api/generate/resume", method = RequestMethod.POST, produces = "application/json")
     public Path generate(@RequestBody Resume resume) {
         System.out.println(resume);
