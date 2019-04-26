@@ -1,14 +1,26 @@
 package be.dominionexperts.cvtool.dto;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public class Work {
 
+    @NotNull
     private String company;
+
+    @NotNull
     private String location;
+
+    @NotNull
     private String website;
+
+    @NotNull
     private String startDate;
+
+    @NotNull
     private String endDate;
+
+    @NotNull
     private List<String> highlights;
 
     public Work() {
