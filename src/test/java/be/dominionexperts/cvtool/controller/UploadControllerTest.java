@@ -2,6 +2,7 @@ package be.dominionexperts.cvtool.controller;
 
 import be.dominionexperts.cvtool.dto.Resume;
 import be.dominionexperts.cvtool.exception.InvalidFileException;
+import be.dominionexperts.cvtool.exception.InvalidJsonException;
 import be.dominionexperts.cvtool.exception.ValidationException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,7 +39,17 @@ public class UploadControllerTest {
     }
 
     @Test
-    public void whenFileWithInvalidTemplateGiven_ThrowsError() throws IOException {
+    public void whenInvalidFileGiven_ThrowsInvalidJsonException() throws IOException {
+        InputStream inputStream = this.getClass().getResourceAsStream("/resumes/resume-invalid-file.json");
+        MockMultipartFile mockMultipartFile = new MockMultipartFile("some-json", inputStream);
+
+        assertThatThrownBy(() -> uploadController.parseResumeFromJsonFile(mockMultipartFile))
+                .isInstanceOf(InvalidJsonException.class)
+                .hasMessage("Unable to parse JSON file");
+    }
+
+    @Test
+    public void whenFileWithInvalidTemplateGiven_ThrowsValidationException() throws IOException {
         InputStream inputStream = this.getClass().getResourceAsStream("/resumes/resume-invalid-template.json");
         MockMultipartFile mockMultipartFile = new MockMultipartFile("some-json", inputStream);
 
@@ -48,7 +59,7 @@ public class UploadControllerTest {
     }
 
     @Test
-    public void whenFileWithInvalidBasicsGiven_ThrowsError() throws IOException {
+    public void whenFileWithInvalidBasicsGiven_ThrowsValidationException() throws IOException {
         InputStream inputStream = this.getClass().getResourceAsStream("/resumes/resume-invalid-basics.json");
         MockMultipartFile mockMultipartFile = new MockMultipartFile("some-json", inputStream);
 
