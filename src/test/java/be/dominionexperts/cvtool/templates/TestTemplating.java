@@ -1,6 +1,5 @@
 package be.dominionexperts.cvtool.templates;
 
-
 import be.dominionexperts.cvtool.dto.Basics;
 import be.dominionexperts.cvtool.dto.Resume;
 import be.dominionexperts.cvtool.util.XDocUtils;
