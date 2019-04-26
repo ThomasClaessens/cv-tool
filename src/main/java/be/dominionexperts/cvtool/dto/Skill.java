@@ -1,11 +1,20 @@
 package be.dominionexperts.cvtool.dto;
 
+import org.springframework.validation.annotation.Validated;
+
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
+@Validated
 public class Skill {
 
+    @NotNull
     private String name;
+
+    @NotNull
     private String level;
+
+    @NotNull
     private List<String> keywords;
 
     public Skill() {

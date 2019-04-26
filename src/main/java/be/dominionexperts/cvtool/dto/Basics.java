@@ -1,11 +1,25 @@
 package be.dominionexperts.cvtool.dto;
 
+import org.springframework.validation.annotation.Validated;
+
+import javax.validation.constraints.NotNull;
+
+@Validated
 public class Basics {
 
+    @NotNull
     private String email;
+
+    @NotNull
     private String phone;
+
+    @NotNull
     private String website;
+
+    @NotNull
     private Location location;
+
+    @NotNull
     private String name;
 
     public Basics() {

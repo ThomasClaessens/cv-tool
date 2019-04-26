@@ -29,6 +29,7 @@ public class UploadControllerIT {
     @Test
     public void whenNoFileGiven_Returns400BadRequest() throws Exception {
         mockMvc.perform(post("/api/upload").contentType("multipart/form-data"))
-               .andExpect(status().isBadRequest());
+                                  .andExpect(status().isBadRequest())
+                                  .andReturn();
     }
 }

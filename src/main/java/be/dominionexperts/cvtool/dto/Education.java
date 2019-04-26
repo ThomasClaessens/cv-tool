@@ -1,13 +1,31 @@
 package be.dominionexperts.cvtool.dto;
 
+import org.springframework.validation.annotation.Validated;
+
+import javax.validation.constraints.NotNull;
+
+@Validated
 public class Education {
 
+    @NotNull
     private String institution;
+
+    @NotNull
     private String location;
+
+    @NotNull
     private String area;
+
+    @NotNull
     private String studyType;
+
+    @NotNull
     private String startDate;
+
+    @NotNull
     private String endDate;
+
+    @NotNull
     private String gpa;
 
     public Education() {

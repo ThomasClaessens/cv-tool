@@ -1,16 +1,38 @@
 package be.dominionexperts.cvtool.dto;
 
+import org.springframework.validation.annotation.Validated;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.util.List;
 
+@Validated
 public class Resume {
+    @Positive
     private int selectedTemplate;
+
+    @NotNull
     private Headings headings;
+
+    @NotNull
     private Basics basics;
+
+    @NotNull
     private List<Education> education;
+
+    @NotNull
     private List<Work> work;
+
+    @NotNull
     private List<Skill> skills;
+
+    @NotNull
     private List<Project> projects;
+
+    @NotNull
     private List<Award> awards;
+
+    @NotNull
     private List<String> sections;
 
     public Resume() {
