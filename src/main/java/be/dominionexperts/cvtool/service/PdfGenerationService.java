@@ -14,7 +14,7 @@ public class PdfGenerationService {
 
     private static final String TECHNICAL_CV_REFERENCE_DOCX = "/Technical_CV_reference.docx";
 
-    public byte[] generatePdf(Resume resume) throws PdfGenerationFailedException {
+    public byte[] generatePdf(Resume resume) {
         try{
             InputStream template = this.getClass().getResourceAsStream(TECHNICAL_CV_REFERENCE_DOCX);
             return XDocUtils.generateDocument(template.readAllBytes(), resume, true)

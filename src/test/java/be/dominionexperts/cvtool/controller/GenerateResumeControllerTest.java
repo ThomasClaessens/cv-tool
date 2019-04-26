@@ -1,6 +1,5 @@
 package be.dominionexperts.cvtool.controller;
 
-import org.apache.commons.io.FileUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,8 +9,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
-import java.io.File;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -36,11 +33,11 @@ public class GenerateResumeControllerTest {
 
     @Test
     public void generatePdfSuccess() throws Exception {
-        String validResume = FileUtils.readFileToString(new File(this.getClass().getResource("/validResume.json").getFile()));
+        byte[] validResumeByteStream = this.getClass().getResourceAsStream("/validResume.json").readAllBytes();
 
         mockMvc.perform(post(GENERATE_RESUME_ENDPOINT)
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
-                .content(validResume))
+                .content(validResumeByteStream))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_PDF));
     }
@@ -55,11 +52,11 @@ public class GenerateResumeControllerTest {
 
     @Test
     public void generatePdfInvalidJson() throws Exception {
-        String invalidResume = FileUtils.readFileToString(new File(this.getClass().getResource("/invalidResume.json").getFile()));
+        final byte[] invalidByteStream = this.getClass().getResourceAsStream("/invalidResume.json").readAllBytes();
 
         mockMvc.perform(post(GENERATE_RESUME_ENDPOINT)
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
-                .content(invalidResume))
+                .content(invalidByteStream))
                 .andExpect(status().isBadRequest());
     }
 }
