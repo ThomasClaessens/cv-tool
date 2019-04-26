@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 
 @RestController
-public class GenerateController {
+public class GenerateResumeController {
 
     private final PdfGenerationService pdfGenerationService;
 
-    public GenerateController(PdfGenerationService pdfGenerationService) {
+    public GenerateResumeController(PdfGenerationService pdfGenerationService) {
         this.pdfGenerationService = pdfGenerationService;
     }
 

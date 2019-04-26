@@ -20,18 +20,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class GenerateControllerTest {
+public class GenerateResumeControllerTest {
 
     private MockMvc mockMvc;
 
     private final static String GENERATE_RESUME_ENDPOINT = "/api/generate/resume";
 
     @Autowired
-    private GenerateController generateController;
+    private GenerateResumeController generateResumeController;
 
     @Before
     public void setUp() {
-        mockMvc = MockMvcBuilders.standaloneSetup(generateController).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(generateResumeController).build();
     }
 
     @Test
