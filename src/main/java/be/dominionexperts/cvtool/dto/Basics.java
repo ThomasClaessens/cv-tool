@@ -4,72 +4,72 @@ import javax.validation.constraints.NotNull;
 
 public class Basics {
 
-    @NotNull
-    private String email;
+	@NotNull
+	private String email;
 
-    @NotNull
-    private String phone;
+	@NotNull
+	private String phone;
 
-    @NotNull
-    private String website;
+	@NotNull
+	private String website;
 
-    @NotNull
-    private Location location;
+	@NotNull
+	private Location location;
 
-    @NotNull
-    private String name;
+	@NotNull
+	private String name;
 
-    @NotNull
-    private String dateOfBirth;
+	@NotNull
+	private String dateOfBirth;
 
-    @NotNull
-    private String citizenship;
+	@NotNull
+	private String citizenship;
 
-    @NotNull
-    private String gender;
+	@NotNull
+	private String gender;
 
-    public Basics() {
-    }
+	public Basics() {
+	}
 
-    private Basics(Builder builder) {
-        email = builder.email;
-        phone = builder.phone;
-        website = builder.website;
-        location = builder.location;
-        name = builder.name;
-	    dateOfBirth = builder.dateOfBirth;
-	    citizenship = builder.citizenship;
-	    gender = builder.gender;
-    }
+	private Basics(Builder builder) {
+		email = builder.email;
+		phone = builder.phone;
+		website = builder.website;
+		location = builder.location;
+		name = builder.name;
+		dateOfBirth = builder.dateOfBirth;
+		citizenship = builder.citizenship;
+		gender = builder.gender;
+	}
 
-    public static Builder newBuilder() {
-        return new Builder();
-    }
+	public static Builder newBuilder() {
+		return new Builder();
+	}
 
 
-    public String getEmail() {
-        return email;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public String getPhone() {
-        return phone;
-    }
+	public String getPhone() {
+		return phone;
+	}
 
-    public String getWebsite() {
-        return website;
-    }
+	public String getWebsite() {
+		return website;
+	}
 
-    public Location getLocation() {
-        return location;
-    }
+	public Location getLocation() {
+		return location;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getDateOfBirth() {
-    	return dateOfBirth;
-    }
+	public String getDateOfBirth() {
+		return dateOfBirth;
+	}
 
 	public String getCitizenship() {
 		return citizenship;
@@ -117,8 +117,32 @@ public class Basics {
 			return this;
 		}
 
-        public Basics build() {
-            return new Basics(this);
-        }
-    }
+		public Builder withDateOfBirth(String dateOfBirth) {
+			this.dateOfBirth = dateOfBirth;
+			return this;
+		}
+
+		public Builder withCitizenship(String citizenship) {
+			this.citizenship = citizenship;
+			return this;
+		}
+
+		public Builder withGender(String gender) {
+			this.gender = gender;
+			return this;
+		}
+
+		public Basics build() {
+			Basics basics = new Basics();
+			basics.website = this.website;
+			basics.email = this.email;
+			basics.dateOfBirth = this.dateOfBirth;
+			basics.citizenship = this.citizenship;
+			basics.phone = this.phone;
+			basics.location = this.location;
+			basics.name = this.name;
+			basics.gender = this.gender;
+			return basics;
+		}
+	}
 }
