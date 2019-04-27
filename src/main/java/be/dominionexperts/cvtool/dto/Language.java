@@ -1,8 +1,13 @@
 package be.dominionexperts.cvtool.dto;
 
+import javax.validation.constraints.NotNull;
+
 public class Language {
 
+    @NotNull
     private String language;
+
+    @NotNull
     private String skillLevel;
 
     public Language() {
