@@ -10,7 +10,7 @@ public class Keyword {
 
     @Min(1)
     @Max(5)
-    private int level;
+    private short level;
 
     public Keyword() {
     }
@@ -34,7 +34,7 @@ public class Keyword {
 
     public static final class Builder {
         private String name;
-        private int level;
+        private short level;
 
         private Builder() {
         }
@@ -44,7 +44,7 @@ public class Keyword {
             return this;
         }
 
-        public Builder withLevel(int level) {
+        public Builder withLevel(short level) {
             this.level = level;
             return this;
         }
