@@ -22,7 +22,7 @@ public class GenerateResumeController {
     }
 
     @RequestMapping(value = "api/generate/resume", method = RequestMethod.POST, produces = {PDF_FORMAT, DOCX_FORMAT})
-    public ResponseEntity<byte[]> generatePdf(@RequestBody Resume resume, @RequestParam(value = "pdf", required = false, defaultValue = "true") boolean isPdf) {
+    public ResponseEntity<byte[]> generateDocument(@RequestBody Resume resume, @RequestParam(value = "pdf", required = false, defaultValue = "true") boolean isPdf) {
         return ResponseEntity.ok()
                              .contentType(isPdf ? MediaType.valueOf(PDF_FORMAT) : MediaType.valueOf(DOCX_FORMAT))
                              .body(documentGenerationService.generateDocument(resume, isPdf));
