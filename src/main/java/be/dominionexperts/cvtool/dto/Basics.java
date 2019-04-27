@@ -19,6 +19,15 @@ public class Basics {
     @NotNull
     private String name;
 
+    @NotNull
+    private String dateOfBirth;
+
+    @NotNull
+    private String citizenship;
+
+    @NotNull
+    private String gender;
+
     public Basics() {
     }
 
@@ -28,6 +37,9 @@ public class Basics {
         website = builder.website;
         location = builder.location;
         name = builder.name;
+	    dateOfBirth = builder.dateOfBirth;
+	    citizenship = builder.citizenship;
+	    gender = builder.gender;
     }
 
     public static Builder newBuilder() {
@@ -55,40 +67,55 @@ public class Basics {
         return name;
     }
 
-    public static final class Builder {
-        private String email;
-        private String phone;
-        private String website;
-        private Location location;
-        private String name;
+    public String getDateOfBirth() {
+    	return dateOfBirth;
+    }
 
-        private Builder() {
-        }
+	public String getCitizenship() {
+		return citizenship;
+	}
 
-        public Builder withEmail(String email) {
-            this.email = email;
-            return this;
-        }
+	public String getGender() {
+		return gender;
+	}
 
-        public Builder withPhone(String phone) {
-            this.phone = phone;
-            return this;
-        }
+	public static final class Builder {
+		private String email;
+		private String phone;
+		private String website;
+		private Location location;
+		private String name;
+		private String dateOfBirth;
+		private String citizenship;
+		private String gender;
 
-        public Builder withWebsite(String website) {
-            this.website = website;
-            return this;
-        }
+		private Builder() {
+		}
 
-        public Builder withLocation(Location location) {
-            this.location = location;
-            return this;
-        }
+		public Builder withEmail(String email) {
+			this.email = email;
+			return this;
+		}
 
-        public Builder withName(String name) {
-            this.name = name;
-            return this;
-        }
+		public Builder withPhone(String phone) {
+			this.phone = phone;
+			return this;
+		}
+
+		public Builder withWebsite(String website) {
+			this.website = website;
+			return this;
+		}
+
+		public Builder withLocation(Location location) {
+			this.location = location;
+			return this;
+		}
+
+		public Builder withName(String name) {
+			this.name = name;
+			return this;
+		}
 
         public Basics build() {
             return new Basics(this);
