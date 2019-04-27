@@ -133,16 +133,7 @@ public class Basics {
 		}
 
 		public Basics build() {
-			Basics basics = new Basics();
-			basics.website = this.website;
-			basics.email = this.email;
-			basics.dateOfBirth = this.dateOfBirth;
-			basics.citizenship = this.citizenship;
-			basics.phone = this.phone;
-			basics.location = this.location;
-			basics.name = this.name;
-			basics.gender = this.gender;
-			return basics;
+			return new Basics(this);
 		}
 	}
 }
