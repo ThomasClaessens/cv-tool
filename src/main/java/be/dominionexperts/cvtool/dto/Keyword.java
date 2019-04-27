@@ -28,7 +28,7 @@ public class Keyword {
         return name;
     }
 
-    public int getLevel() {
+    public short getLevel() {
         return level;
     }
 
