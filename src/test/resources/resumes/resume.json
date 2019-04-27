@@ -13,7 +13,10 @@
     "phone": "0472933846",
     "location": {
       "address": "Hemiksem"
-    }
+    },
+    "dateOfBirth": "22-01-2019",
+    "citizenship": "Belg",
+    "gender": "XYZ"
   },
   "education": [
     {
