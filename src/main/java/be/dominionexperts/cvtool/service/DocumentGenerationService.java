@@ -9,17 +9,15 @@ import org.springframework.stereotype.Service;
 import java.io.InputStream;
 
 @Service
-public class PdfGenerationService {
-
+public class DocumentGenerationService {
     private static final String TECHNICAL_CV_REFERENCE_DOCX = "/Technical_CV_reference.docx";
 
-    public byte[] generatePdf(Resume resume) {
-        try{
+    public byte[] generateDocument(Resume resume, boolean isPdf) {
+        try {
             InputStream template = this.getClass().getResourceAsStream(TECHNICAL_CV_REFERENCE_DOCX);
-            return XDocUtils.generateDocument(template.readAllBytes(), resume, true)
-                .orElseThrow(PdfGenerationFailedException::new);
-        }
-        catch (Exception e) {
+            return XDocUtils.generateDocument(template.readAllBytes(), resume, isPdf)
+                            .orElseThrow(PdfGenerationFailedException::new);
+        } catch (Exception e) {
             throw new TemplateException(TECHNICAL_CV_REFERENCE_DOCX);
         }
     }

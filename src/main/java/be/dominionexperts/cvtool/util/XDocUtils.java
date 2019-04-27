@@ -1,6 +1,7 @@
 package be.dominionexperts.cvtool.util;
 
 import be.dominionexperts.cvtool.dto.Resume;
+import be.dominionexperts.cvtool.exception.GenerationFailedException;
 import fr.opensagres.xdocreport.converter.ConverterTypeTo;
 import fr.opensagres.xdocreport.converter.ConverterTypeVia;
 import fr.opensagres.xdocreport.converter.Options;
@@ -18,37 +19,19 @@ public class XDocUtils {
 
     public static Optional<byte[]> generateDocument(byte[] template, Resume resumeData, boolean convertToPdf) {
         try (InputStream in = new ByteArrayInputStream(template)) {
-
             IXDocReport report = XDocReportRegistry.getRegistry().loadReport(in, TemplateEngineKind.Velocity);
-
             IContext context = buildContext(report, resumeData);
-
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             Options options;
-            if(convertToPdf) {
+            if (convertToPdf) {
                 options = Options.getTo(ConverterTypeTo.PDF).via(ConverterTypeVia.XWPF);
                 report.convert(context, options, out);
             } else {
                 report.process(context, out);
             }
             return Optional.of(out.toByteArray());
-
         } catch (Exception e) {
-            throw new IllegalStateException(e.getMessage(), e);
-        }
-    }
-
-    public static void save(String path, String filename, byte[] bytes){
-        File file = new File(path);
-        file.mkdirs();
-        File fullPathToFile = new File(file, filename);
-        try {
-            FileOutputStream outputStream = new FileOutputStream(fullPathToFile);
-            outputStream.write(bytes);
-            outputStream.flush();
-            outputStream.close();
-        }catch (Exception ex){
-            ex.printStackTrace();
+            throw new GenerationFailedException(e.getMessage(), e);
         }
     }
 
@@ -61,13 +44,8 @@ public class XDocUtils {
             fieldsMetadata.load("resume", Resume.class, false);
 
             return context;
-
         } catch (XDocReportException e) {
-            e.printStackTrace();
-
+            throw new GenerationFailedException(e.getMessage(), e);
         }
-        return null;
     }
-
-
 }

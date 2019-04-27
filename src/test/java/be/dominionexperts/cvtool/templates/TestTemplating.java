@@ -6,6 +6,8 @@ import be.dominionexperts.cvtool.util.XDocUtils;
 import fr.opensagres.xdocreport.core.io.IOUtils;
 import org.junit.Test;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -19,9 +21,8 @@ public class TestTemplating {
         URL templateFile = this.getClass().getResource("/Hello.docx");
         byte[] template = IOUtils.toByteArray(templateFile.openStream());
         String outputPath = Paths.get(templateFile.toURI()).getParent().toString();
-        XDocUtils.generateDocument(template, resume, true).ifPresent(bytes -> XDocUtils.save(outputPath, "out.pdf", bytes));
+        XDocUtils.generateDocument(template, resume, true).ifPresent(bytes -> save(outputPath, "out.pdf", bytes));
     }
-
 
     @Test
     public void testDocumentGenerationDocx() throws IOException, URISyntaxException {
@@ -29,7 +30,20 @@ public class TestTemplating {
         URL templateFile = this.getClass().getResource("/Hello.docx");
         byte[] template = IOUtils.toByteArray(templateFile.openStream());
         String outputPath = Paths.get(templateFile.toURI()).getParent().toString();
-        XDocUtils.generateDocument(template, resume, false).ifPresent(bytes -> XDocUtils.save(outputPath, "out.docx", bytes));
+        XDocUtils.generateDocument(template, resume, false).ifPresent(bytes -> save(outputPath, "out.docx", bytes));
     }
 
+    private static void save(String path, String filename, byte[] bytes){
+        File file = new File(path);
+        file.mkdirs();
+        File fullPathToFile = new File(file, filename);
+        try {
+            FileOutputStream outputStream = new FileOutputStream(fullPathToFile);
+            outputStream.write(bytes);
+            outputStream.flush();
+            outputStream.close();
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+    }
 }
