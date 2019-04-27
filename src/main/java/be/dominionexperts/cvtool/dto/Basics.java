@@ -28,6 +28,9 @@ public class Basics {
 	@NotNull
 	private String gender;
 
+	@NotNull
+	private String jobTitle;
+
 	public Basics() {
 	}
 
@@ -40,12 +43,12 @@ public class Basics {
 		dateOfBirth = builder.dateOfBirth;
 		citizenship = builder.citizenship;
 		gender = builder.gender;
+		jobTitle = builder.jobTitle;
 	}
 
 	public static Builder newBuilder() {
 		return new Builder();
 	}
-
 
 	public String getEmail() {
 		return email;
@@ -79,6 +82,10 @@ public class Basics {
 		return gender;
 	}
 
+	public String getJobTitle() {
+		return jobTitle;
+	}
+
 	public static final class Builder {
 		private String email;
 		private String phone;
@@ -88,6 +95,7 @@ public class Basics {
 		private String dateOfBirth;
 		private String citizenship;
 		private String gender;
+		private String jobTitle;
 
 		private Builder() {
 		}
@@ -129,6 +137,11 @@ public class Basics {
 
 		public Builder withGender(String gender) {
 			this.gender = gender;
+			return this;
+		}
+
+		public Builder withJobTitle(String jobTitle) {
+			this.jobTitle = jobTitle;
 			return this;
 		}
 
