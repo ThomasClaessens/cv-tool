@@ -2,6 +2,7 @@ package be.dominionexperts.cvtool.templates;
 
 import be.dominionexperts.cvtool.dto.Basics;
 import be.dominionexperts.cvtool.dto.Education;
+import be.dominionexperts.cvtool.dto.Keyword;
 import be.dominionexperts.cvtool.dto.Language;
 import be.dominionexperts.cvtool.dto.Resume;
 import be.dominionexperts.cvtool.dto.Skill;
@@ -69,8 +70,16 @@ public class TestTemplating {
         Language language = Language.newBuilder().withLanguage("Swahili").withSkillLevel("nihil").build();
         Language language2 = Language.newBuilder().withLanguage("Nederlands").withSkillLevel("moedertaal").build();
 
-        Skill skill = Skill.newBuilder().withName("Database").withKeywords(List.of("MYSQL", "PostgreSql", "Orcale DB")).build();
-        Skill skill2 = Skill.newBuilder().withName("OS").withKeywords(List.of("Windows 10", "Windows 7", "Windows XP", "Linux")).build();
+        Keyword w10Keyword = Keyword.newBuilder().withLevel((short)1).withName("Windows 10").build();
+        Keyword w7Keyword = Keyword.newBuilder().withLevel((short)4).withName("Windows 7").build();
+        Keyword linuxKeyword = Keyword.newBuilder().withLevel((short)3).withName("Linux").build();
+
+        Keyword mysqlKeyword = Keyword.newBuilder().withLevel((short)1).withName("MYSQL").build();
+        Keyword postgreSqlKeyword = Keyword.newBuilder().withLevel((short)2).withName("PostgreSql").build();
+        Keyword oracleDBKeyword = Keyword.newBuilder().withLevel((short)5).withName("Orcale DB").build();
+
+        Skill skill = Skill.newBuilder().withName("Database").withKeywords(List.of(mysqlKeyword, postgreSqlKeyword, oracleDBKeyword)).build();
+        Skill skill2 = Skill.newBuilder().withName("OS").withKeywords(List.of(w10Keyword, w7Keyword, linuxKeyword)).build();
 
         return Resume.newBuilder()
                 .withBasics(Basics.newBuilder().withName("Thomas").build())
