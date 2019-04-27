@@ -32,6 +32,9 @@ public class Resume {
     @NotNull
     private List<String> sections;
 
+    @NotNull
+    private List<Language> languages;
+
     public Resume() {
     }
 
@@ -45,6 +48,7 @@ public class Resume {
         projects = builder.projects;
         awards = builder.awards;
         sections = builder.sections;
+        languages = builder.languages;
     }
 
     public static Builder newBuilder() {
@@ -87,6 +91,10 @@ public class Resume {
         return sections;
     }
 
+    public List<Language> getLanguages() {
+        return languages;
+    }
+
     public static final class Builder {
         private int selectedTemplate;
         private Headings headings;
@@ -97,6 +105,7 @@ public class Resume {
         private List<Project> projects;
         private List<Award> awards;
         private List<String> sections;
+        private List<Language> languages;
 
         private Builder() {
         }
@@ -143,6 +152,11 @@ public class Resume {
 
         public Builder withSections(List<String> sections) {
             this.sections = sections;
+            return this;
+        }
+
+        public Builder withLanguages(List<Language> languages) {
+            this.languages = languages;
             return this;
         }
 

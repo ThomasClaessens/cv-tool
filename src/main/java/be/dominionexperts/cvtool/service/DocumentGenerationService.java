@@ -10,7 +10,7 @@ import java.io.InputStream;
 
 @Service
 public class DocumentGenerationService {
-    private static final String TECHNICAL_CV_REFERENCE_DOCX = "/Technical_CV_reference.docx";
+    private static final String TECHNICAL_CV_REFERENCE_DOCX = "/cv_template.docx";
 
     public byte[] generateDocument(Resume resume, boolean isPdf) {
         try {
