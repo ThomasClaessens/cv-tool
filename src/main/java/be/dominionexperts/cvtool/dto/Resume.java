@@ -18,9 +18,6 @@ public class Resume {
     private List<Education> education;
 
     @NotNull
-    private List<Language> languages;
-
-    @NotNull
     private List<Work> work;
 
     @NotNull
@@ -34,6 +31,9 @@ public class Resume {
 
     @NotNull
     private List<String> sections;
+
+    @NotNull
+    private List<Language> languages;
 
     public Resume() {
     }
