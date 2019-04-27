@@ -42,9 +42,11 @@
   "skills": [
     {
       "name": "",
-      "level": "",
       "keywords": [
-        ""
+        {
+          "name": "",
+          "level": 1
+        }
       ]
     }
   ],

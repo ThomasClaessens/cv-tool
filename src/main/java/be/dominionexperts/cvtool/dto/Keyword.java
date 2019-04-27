@@ -1,22 +1,23 @@
 package be.dominionexperts.cvtool.dto;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
-public class Skill {
-
+public class Keyword {
     @NotNull
     private String name;
 
-    @NotNull
-    private List<Keyword> keywords;
+    @Min(1)
+    @Max(5)
+    private int level;
 
-    public Skill() {
+    public Keyword() {
     }
 
-    private Skill(Builder builder) {
+    public Keyword(Builder builder) {
         name = builder.name;
-        keywords = builder.keywords;
+        level = builder.level;
     }
 
     public static Builder newBuilder() {
@@ -27,13 +28,13 @@ public class Skill {
         return name;
     }
 
-    public List<Keyword> getKeywords() {
-        return keywords;
+    public int getLevel() {
+        return level;
     }
 
     public static final class Builder {
         private String name;
-        private List<Keyword> keywords;
+        private int level;
 
         private Builder() {
         }
@@ -43,13 +44,13 @@ public class Skill {
             return this;
         }
 
-        public Builder withKeywords(List<Keyword> keywords) {
-            this.keywords = keywords;
+        public Builder withLevel(int level) {
+            this.level = level;
             return this;
         }
 
-        public Skill build() {
-            return new Skill(this);
+        public Keyword build() {
+            return new Keyword(this);
         }
     }
 }
