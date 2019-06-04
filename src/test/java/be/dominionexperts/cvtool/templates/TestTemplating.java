@@ -1,11 +1,6 @@
 package be.dominionexperts.cvtool.templates;
 
-import be.dominionexperts.cvtool.dto.Basics;
-import be.dominionexperts.cvtool.dto.Education;
-import be.dominionexperts.cvtool.dto.Keyword;
-import be.dominionexperts.cvtool.dto.Language;
-import be.dominionexperts.cvtool.dto.Resume;
-import be.dominionexperts.cvtool.dto.Skill;
+import be.dominionexperts.cvtool.dto.*;
 import be.dominionexperts.cvtool.util.XDocUtils;
 import fr.opensagres.xdocreport.core.io.IOUtils;
 import org.junit.Test;
@@ -81,11 +76,23 @@ public class TestTemplating {
         Skill skill = Skill.newBuilder().withName("Database").withKeywords(List.of(mysqlKeyword, postgreSqlKeyword, oracleDBKeyword)).build();
         Skill skill2 = Skill.newBuilder().withName("OS").withKeywords(List.of(w10Keyword, w7Keyword, linuxKeyword)).build();
 
+        Project project = Project.newBuilder()
+                .withName("Project 1")
+                .withDescription("Some Description")
+                .withEndDate("Sep 2019")
+                .withStartDate("Sep 2016")
+                .withUrl("someUrl")
+                .withKeywords(List.of("IntelliJ"))
+                .withSector("Informatics")
+                .withJobTitle("Developer")
+                .build();
+
         return Resume.newBuilder()
                 .withBasics(Basics.newBuilder().withName("Thomas").build())
                 .withEducation(List.of(education,education2))
                 .withLanguages(List.of(language, language2))
                 .withSkills(List.of(skill, skill2))
+                .withProjects(List.of(project))
                 .build();
     }
 }

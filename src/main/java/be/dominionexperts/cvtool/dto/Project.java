@@ -17,6 +17,18 @@ public class Project {
     @NotNull
     private List<String> keywords;
 
+    @NotNull
+    private String startDate;
+
+    @NotNull
+    private String endDate;
+
+    @NotNull
+    private String sector;
+
+    @NotNull
+    private String jobTitle;
+
     public Project() {
     }
 
@@ -25,6 +37,10 @@ public class Project {
         description = builder.description;
         url = builder.url;
         keywords = builder.keywords;
+        startDate = builder.startDate;
+        endDate = builder.endDate;
+        sector = builder.sector;
+        jobTitle = builder.jobTitle;
     }
 
     public static Builder newBuilder() {
@@ -48,11 +64,31 @@ public class Project {
         return keywords;
     }
 
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public String getSector() {
+        return sector;
+    }
+
+    public String getJobTitle() {
+        return jobTitle;
+    }
+
     public static final class Builder {
         private String name;
         private String description;
         private String url;
         private List<String> keywords;
+        private String startDate;
+        private String endDate;
+        private String sector;
+        private String jobTitle;
 
         private Builder() {
         }
@@ -74,6 +110,26 @@ public class Project {
 
         public Builder withKeywords(List<String> keywords) {
             this.keywords = keywords;
+            return this;
+        }
+
+        public Builder withStartDate(String startDate) {
+            this.startDate = startDate;
+            return this;
+        }
+
+        public Builder withEndDate(String endDate) {
+            this.endDate = endDate;
+            return this;
+        }
+
+        public Builder withSector(String sector) {
+            this.sector = sector;
+            return this;
+        }
+
+        public Builder withJobTitle(String jobTitle) {
+            this.jobTitle = jobTitle;
             return this;
         }
 
