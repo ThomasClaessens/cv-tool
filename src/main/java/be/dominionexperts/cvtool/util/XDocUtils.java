@@ -12,14 +12,14 @@ import fr.opensagres.xdocreport.converter.Options;
 import fr.opensagres.xdocreport.core.XDocReportException;
 import fr.opensagres.xdocreport.document.IXDocReport;
 import fr.opensagres.xdocreport.document.registry.XDocReportRegistry;
-import fr.opensagres.xdocreport.itext.extension.font.IFontProvider;
 import fr.opensagres.xdocreport.template.IContext;
 import fr.opensagres.xdocreport.template.TemplateEngineKind;
 import fr.opensagres.xdocreport.template.formatter.FieldsMetadata;
 import org.springframework.core.io.ClassPathResource;
 
-import java.awt.Color;
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.util.Optional;
 
 public class XDocUtils {
@@ -32,53 +32,44 @@ public class XDocUtils {
             Options options;
 
 	        PdfOptions pdfOptions = PdfOptions.create();
-	        pdfOptions.fontProvider(new IFontProvider() {
-		        @Override
-		        public Font getFont(String familyName, String encoding, float size, int style, Color color) {
-			        try {
-				        if (familyName.equalsIgnoreCase("SYMBOL")) {
-					        BaseFont baseFont =
-							        BaseFont.createFont( new ClassPathResource("fonts/symbol.ttf").getURL().toString(), encoding, BaseFont.EMBEDDED);
-					        return new Font(baseFont, size, style, color);
+	        pdfOptions.fontProvider((familyName, encoding, size, style, color) -> {
+				try {
+					String classPathUrl = "";
+					switch (familyName.toUpperCase()) {
+						case "SYMBOL":
+							classPathUrl = new ClassPathResource("fonts/symbol.ttf").getURL().toString();
+							break;
+						case "CALIBRI":
+							classPathUrl = new ClassPathResource("fonts/calibri.ttf").getURL().toString();
+							if (style == Font.BOLD) {
+								classPathUrl = new ClassPathResource("fonts/calibri-bold.ttf").getURL().toString();
+							}
+							break;
+						case "NOTO SANS SYMBOLS":
+							classPathUrl = new ClassPathResource("fonts/notoSansSymbols.ttf").getURL().toString();
+							break;
+						case "TIMES NEW ROMAN":
+							classPathUrl = new ClassPathResource("fonts/timesNewRoman.ttf").getURL().toString();
+							break;
+						case "VERDANA":
+							classPathUrl = new ClassPathResource("fonts/verdana.ttf").getURL().toString();
+							if (style == Font.BOLD) {
+								classPathUrl = new ClassPathResource("fonts/verdana-bold.ttf").getURL().toString();
+							}
+							break;
+						case "COURIER NEW":
+							classPathUrl = new ClassPathResource("fonts/courierNew.ttf").getURL().toString();
+							break;
+						default:
+							return FontFactory.getFont(familyName, encoding, size, style, color);
+					}
 
-				        }
-				        if (familyName.equalsIgnoreCase("CALIBRI")) {
-					        BaseFont baseFont =
-							        BaseFont.createFont( new ClassPathResource("fonts/calibri.ttf").getURL().toString(), encoding, BaseFont.EMBEDDED);
-					        return new Font(baseFont, size, style, color);
-
-				        }
-				        if (familyName.equalsIgnoreCase("NOTO SANS SYMBOLS")) {
-					        BaseFont baseFont =
-							        BaseFont.createFont( new ClassPathResource("fonts/notoSansSymbols.ttf").getURL().toString(), encoding, BaseFont.EMBEDDED);
-					        return new Font(baseFont, size, style, color);
-
-				        }
-				        if (familyName.equalsIgnoreCase("TIMES NEW ROMAN")) {
-					        BaseFont baseFont =
-							        BaseFont.createFont( new ClassPathResource("fonts/timesNewRoman.ttf").getURL().toString(), encoding, BaseFont.EMBEDDED);
-					        return new Font(baseFont, size, style, color);
-
-				        }
-				        if (familyName.equalsIgnoreCase("VERDANA")) {
-					        BaseFont baseFont =
-							        BaseFont.createFont( new ClassPathResource("fonts/verdana.ttf").getURL().toString(), encoding, BaseFont.EMBEDDED);
-					        return new Font(baseFont, size, style, color);
-
-				        }
-				        if (familyName.equalsIgnoreCase( "COURIER NEW")) {
-					        BaseFont baseFont =
-							        BaseFont.createFont( new ClassPathResource("fonts/courierNew.ttf").getURL().toString(), encoding, BaseFont.EMBEDDED);
-					        return new Font(baseFont, size, style, color);
-
-				        }
-			        } catch (Exception e) {
-				        throw new RuntimeException(e);
-			        }
-
-			        return FontFactory.getFont(familyName, encoding, size, style, color);
-		        }
-	        });
+					BaseFont baseFont = BaseFont.createFont(classPathUrl, encoding, BaseFont.EMBEDDED);
+					return new Font(baseFont, size, style, color);
+				} catch (Exception e) {
+					throw new RuntimeException(e);
+				}
+			});
 
             if (convertToPdf) {
                 options = Options.getTo(ConverterTypeTo.PDF).via(ConverterTypeVia.XWPF);
